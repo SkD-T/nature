@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nature - Consciência Ambiental</title>
+  <style>
+    :root{--green:#0f3d2e;--accent:#22c55e}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:"Segoe UI",Arial,sans-serif;background:radial-gradient(circle at top,#0f3d2e,#020617);color:#e6fffa;overflow-x:hidden}
+    header{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px}
+    h1{font-size:clamp(2.5rem,6vw,4rem);background:linear-gradient(90deg,#22c55e,#4ade80);-webkit-background-clip:text;color:transparent}
+    p{max-width:650px;margin:20px auto;line-height:1.6;color:#bbf7d0}
+    .btn{margin-top:20px;padding:12px 28px;border-radius:30px;border:none;background:linear-gradient(90deg,#22c55e,#16a34a);color:white;font-weight:bold;cursor:pointer;transition:.3s}
+    .btn:hover{transform:scale(1.05);box-shadow:0 0 20px #22c55e88}
+    section{padding:80px 20px;text-align:center}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:40px}
+    .card{background:rgba(255,255,255,.05);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);padding:25px;border-radius:20px;transition:.4s;text-align:left}
+    .card:hover{transform:translateY(-10px) scale(1.02);box-shadow:0 10px 30px rgba(34,197,94,.2)}
+    .card h3{margin-bottom:10px}
+    .card ul{margin-top:10px;padding-left:18px}
+    .highlight{background:linear-gradient(135deg,#022c22,#064e3b)}
+    footer{text-align:center;padding:30px;color:#86efac}
+    a{color:#4ade80;text-decoration:none}
+
+    /* árvore */
+    .tree-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.9);display:flex;justify-content:center;align-items:flex-end;opacity:0;pointer-events:none;transition:.5s}
+    .tree{width:60px;height:0;background:#8b5a2b;border-radius:10px;position:relative;transition:1s}
+    .tree::after{content:"";position:absolute;bottom:40px;left:-40px;width:140px;height:140px;background:radial-gradient(circle,#22c55e,#166534);border-radius:50%;opacity:0;transition:1s}
+    .tree.active{height:120px}
+    .tree.active::after{opacity:1}
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🌿 Nature</h1>
+  <p>Conscientização sobre lixo urbano e seu impacto direto na água, no saneamento e no futuro das cidades.</p>
+  <button class="btn" onclick="scrollToODS()">Explorar mais</button>
+</header>
+
+<section id="ods">
+  <h2>💧 ODS 6 - Água e Saneamento</h2>
+  <p>A forma como lidamos com o lixo influencia diretamente a qualidade da água e o saneamento.</p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Água Limpa</h3>
+      <p>Evitar a contaminação dos recursos hídricos.</p>
+      <ul>
+        <li>Redução da poluição em rios</li>
+        <li>Proteção de lençóis freáticos</li>
+        <li>Menos lixo em áreas urbanas</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Saneamento</h3>
+      <p>Melhorar a estrutura urbana e a saúde pública.</p>
+      <ul>
+        <li>Coleta eficiente de resíduos</li>
+        <li>Tratamento adequado do lixo</li>
+        <li>Prevenção de enchentes</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Reciclagem</h3>
+      <p>Transformar lixo em novos recursos.</p>
+      <ul>
+        <li>Diminuição de resíduos</li>
+        <li>Economia de matéria-prima</li>
+        <li>Geração de renda</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="highlight">
+  <h2>⚠️ O Problema</h2>
+  <p>O descarte incorreto do lixo causa enchentes, contamina a água e prejudica a saúde da população.</p>
+</section>
+
+<section>
+  <h2>♻️ O Que Fazer</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Separar Lixo</h3>
+      <p>Organize resíduos recicláveis e orgânicos.</p>
+      <ul>
+        <li>Papel, plástico e vidro</li>
+        <li>Redução de lixo em aterros</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Consumir Melhor</h3>
+      <p>Reduza desperdícios no dia a dia.</p>
+      <ul>
+        <li>Evite produtos descartáveis</li>
+        <li>Prefira reutilizáveis</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>🌎 Faça Parte</h2>
+  <p>Pequenas atitudes geram grandes mudanças.</p>
+  <button class="btn" onclick="plantTree()">Quero ajudar</button>
+</section>
+
+<footer>
+  © 2026 Nature
+</footer>
+
+<div class="tree-overlay" id="overlay">
+  <div class="tree" id="tree"></div>
+</div>
+
+<script>
+function scrollToODS(){
+  document.getElementById('ods').scrollIntoView({behavior:'smooth'});
+}
+
+function plantTree(){
+  const overlay = document.getElementById('overlay');
+  const tree = document.getElementById('tree');
+
+  overlay.style.opacity = 1;
+  overlay.style.pointerEvents = 'all';
+
+  setTimeout(()=>{tree.classList.add('active')},200);
+
+  setTimeout(()=>{
+    window.open('https://www.wwf.org.br','_blank');
+  },1500);
+
+  setTimeout(()=>{
+    overlay.style.opacity = 0;
+    overlay.style.pointerEvents = 'none';
+    tree.classList.remove('active');
+  },3000);
+}
+</script>
+
+</body>
+</html>
